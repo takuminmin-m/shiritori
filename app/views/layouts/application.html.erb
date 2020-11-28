@@ -12,6 +12,11 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <ul>
+      <li><%= link_to "top", root_path %></li>
+      <li><%= link_to "about", static_pages_about_path %></li>
+      <li><%= link_to "help", static_pages_help_path %></li>
+    </ul>
     <%= yield %>
   </body>
 </html>
