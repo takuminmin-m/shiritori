@@ -1,24 +1,7 @@
-# README
+# Shiritori
+しりとりをするためだけのwebアプリです
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 実装したい機能
+  - しりとりルーム
+  - 出た単語を取得できるAPI
+  - マナー違反もしくはふさわしくない単語の報告と多数決による削除機能
