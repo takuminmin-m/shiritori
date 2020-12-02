@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/show'
   root "static_pages#index"
   get 'static_pages/about'
   get 'static_pages/help'
