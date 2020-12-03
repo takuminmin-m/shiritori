@@ -17,7 +17,7 @@
       <li><%= link_to "about", static_pages_about_path %></li>
       <li><%= link_to "help", static_pages_help_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to "chat room", rooms_show_path %></li>
+        <li><%= link_to "room list", rooms_path %></li>
         <li><%= link_to "edit user information", edit_user_registration_path %></li>
         <li><%= link_to "log out", destroy_user_session_path, method: :delete %></li>
       <% else %>

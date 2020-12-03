@@ -2,7 +2,7 @@ class WordBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(word)
-    ActionCable.server.broadcast "room_channel", word: render_word(word)
+    ActionCable.server.broadcast "room_channel_#{word.room_id}", word: render_word(word)
   end
 
   private
