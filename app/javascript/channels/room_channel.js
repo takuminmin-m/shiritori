@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-$(function() {
+$(document).on("turbolinks:load", function() {
   const chatChannel = consumer.subscriptions.create({ channel: "RoomChannel", room: $("#words").data("room_id") }, {
     connected() {
       // Called when the subscription is ready for use on the server

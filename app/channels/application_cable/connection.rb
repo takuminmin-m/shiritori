@@ -1,6 +1,6 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    indentified_by :current_user
+    identified_by :current_user
 
     def connect
       reject_unauthorized_connection unless find_verified_user
