@@ -2,13 +2,16 @@ class WordBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(word)
-    ActionCable.server.broadcast word.room, word: render_word(word)
+    RoomChannel.broadcast_to(word.room, render_word(word))
   end
 
   private
 
   def render_word(word)
-    ApplicationController.renderer.render partial: "words/word", locals: { word: word }
+    {
+      content: word.content,
+      user_name: User.find(word.user_id)[:name]
+    }
   end
 
 end
