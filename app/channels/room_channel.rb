@@ -10,7 +10,9 @@ class RoomChannel < ApplicationCable::Channel
 
   def speak(data)
     set_room
-    if !(@room.words.exists?)
+    if data["word"][-1] == "ん"
+      return
+    elsif !(@room.words.exists?)
       Word.create! content: data["word"], user_id: current_user.id, room_id: params["room"]
     elsif @room.words.last.content[-1] == data["word"][0]
       Word.create! content: data["word"], user_id: current_user.id, room_id: params["room"]
