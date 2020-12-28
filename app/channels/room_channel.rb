@@ -11,11 +11,13 @@ class RoomChannel < ApplicationCable::Channel
   def speak(data)
     set_room
     if data["word"][-1] == "ん"
-      return
+      send_message("語尾に「ん」がついてはいけません")
     elsif !(@room.words.exists?)
       Word.create! content: data["word"], user_id: current_user.id, room_id: params["room"]
     elsif @room.words.last.content[-1] == data["word"][0]
       Word.create! content: data["word"], user_id: current_user.id, room_id: params["room"]
+    else
+      send_message("この言葉はルールに適合していません")
     end
   end
 
@@ -24,5 +26,9 @@ class RoomChannel < ApplicationCable::Channel
 
   def set_room
     @room = Room.find(params["room"])
+  end
+
+  def send_message(message)
+    UserMessageBroadcastJob.perform_later message, current_user
   end
 end
