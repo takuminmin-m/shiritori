@@ -11,7 +11,7 @@ $(document).on("turbolinks:load", function() {
     },
 
     received(data) {
-      alert(`message: ${data["message"]}`);
+      alert(`${data["message"]}`);
     }
   });
 });
