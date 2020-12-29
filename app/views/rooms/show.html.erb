@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'channels', 'data-turbolinks-track': 'reload' %>
 <h1><%= @room.name %> room</h1>
 <div id="words" data-room_id="<%= @room.id %>">
   <%= render @words %>
