@@ -1,12 +1,12 @@
 <%= form_with model: @room do |f| %>
 
   <div class="field">
-    <%= f.label :name, "name" %>
+    <%= f.label :name, "部屋名" %>
     <%= f.text_field :name, autofocus: true %>
   </div>
 
   <div class="actions">
-    <%= f.submit "create" %>
+    <%= f.submit "作る" %>
   </div>
 
 <% end %>
