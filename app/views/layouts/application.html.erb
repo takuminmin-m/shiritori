@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>しりとり</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render "layouts/head" %>
   </head>
 
   <body>
@@ -16,26 +10,8 @@
       <%= yield(:body_attributes) %>
     <% end %>
     >
-      <div class="row">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
-      <div class="row">
-        <ul>
-          <li><%= link_to "トップ", root_path %></li>
-          <li><%= link_to "このサイトについて", static_pages_about_path %></li>
-          <li><%= link_to "ヘルプ", static_pages_help_path %></li>
-          <% if user_signed_in? %>
-            <li><%= link_to "部屋リスト", rooms_path %></li>
-            <li><%= link_to "部屋を作る", new_room_path %></li>
-            <li><%= link_to "ユーザー情報を編集", edit_user_registration_path %></li>
-            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to "サインアップ", new_user_registration_path %></li>
-            <li><%= link_to "ログイン", new_user_session_path %></li>
-          <% end %>
-        </ul>
-      </div>
+      <%= render "layouts/alert" %>
+      <%= render "layouts/header" %>
       <% if user_signed_in? %>
         <div class="row">
           <strong>ユーザー情報</strong>

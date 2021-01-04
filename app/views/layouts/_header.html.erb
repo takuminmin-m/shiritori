@@ -1,0 +1,16 @@
+<div class="row">
+  <ul>
+    <li><%= link_to "トップ", root_path %></li>
+    <li><%= link_to "このサイトについて", static_pages_about_path %></li>
+    <li><%= link_to "ヘルプ", static_pages_help_path %></li>
+    <% if user_signed_in? %>
+      <li><%= link_to "部屋リスト", rooms_path %></li>
+      <li><%= link_to "部屋を作る", new_room_path %></li>
+      <li><%= link_to "ユーザー情報を編集", edit_user_registration_path %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "サインアップ", new_user_registration_path %></li>
+      <li><%= link_to "ログイン", new_user_session_path %></li>
+    <% end %>
+  </ul>
+</div>
