@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :words
   has_many :room_ownerships
+  has_many :rooms, through: :room_ownerships
 end
