@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_06_072818) do
+ActiveRecord::Schema.define(version: 2021_01_06_093141) do
+
+  create_table "room_ownerships", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_room_ownerships_on_user_id"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.integer "room_ownerships_id"
+    t.integer "room_ownership_id"
+    t.index ["room_ownership_id"], name: "index_rooms_on_room_ownership_id"
+    t.index ["room_ownerships_id"], name: "index_rooms_on_room_ownerships_id"
   end
 
   create_table "users", force: :cascade do |t|

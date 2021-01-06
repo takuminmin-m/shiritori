@@ -15,8 +15,9 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
-    if @room.save
+    @room_ownership = current_user.room_ownerships.build
+    @room = @room_ownership.build_room(room_params)
+    if @room_ownership.save && @room.save
       redirect_to rooms_path
     else
       render "new"
@@ -32,5 +33,4 @@ class RoomsController < ApplicationController
   def set_room
     @room = Room.find(params[:id])
   end
-
 end
