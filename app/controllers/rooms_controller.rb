@@ -3,10 +3,13 @@ class RoomsController < ApplicationController
   before_action :set_room, only: %i[show update edit delete destroy]
 
   def index
-    @rooms = Room.all.order(:id)
   end
 
   def show
+    unless have_membership?(@room)
+      redirect_to rooms_path, alert: "権限がないためその操作を完了できません"
+      return
+    end
     @words = @room.words
   end
 
@@ -17,7 +20,9 @@ class RoomsController < ApplicationController
   def create
     @room_ownership = current_user.room_ownerships.build
     @room = @room_ownership.build_room(room_params)
-    if @room_ownership.save && @room.save
+    @room_membership = @room.room_memberships.build
+    @room_membership.user = current_user
+    if @room_ownership.save && @room.save && @room_membership.save
       redirect_to rooms_path
     else
       render "new"

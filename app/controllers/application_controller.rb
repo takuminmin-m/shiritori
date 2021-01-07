@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
     room.room_ownership.user == current_user
   end
 
+  def have_membership?(room)
+    if room.room_memberships.find_by(user_id: current_user.id)
+      true
+    else
+      false
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

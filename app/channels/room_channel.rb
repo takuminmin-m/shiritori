@@ -9,6 +9,9 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
+    if !(have_membership?)
+      return
+    end
     set_room
     if data["word"] =~ /[^ぁ-んー]/
       send_message "ひらがなのみを使用してください"
@@ -49,5 +52,13 @@ class RoomChannel < ApplicationCable::Channel
 
   def post_word(word, room_id)
     Word.create! content: word, user_id: current_user.id, room_id: room_id
+  end
+
+  def have_membership?
+    if Room.find(params["room"]).room_memberships.find_by(user_id: current_user.id)
+      true
+    else
+      false
+    end
   end
 end
