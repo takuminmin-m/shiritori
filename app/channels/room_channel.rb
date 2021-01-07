@@ -10,12 +10,23 @@ class RoomChannel < ApplicationCable::Channel
 
   def speak(data)
     set_room
-    if !(data["word"] =~ /\p{Hiragana}/)
+    if data["word"] =~ /[^ぁ-んー]/
       send_message "ひらがなのみを使用してください"
     elsif data["word"][-1] == "ん"
       send_message "語尾に「ん」がついてはいけません"
+    elsif data["word"] =~ /ー{2,}/
+      send_message "「ー」が二つ以上重なってはいけません"
     elsif @room.words.exists?
-      if @room.words.last.content[-1] != data["word"][0]
+      @last_word_content = @room.words.last.content
+      if @last_word_content[-1] != data["word"][0]
+        if @last_word_content[-1] == "ー"
+          if @last_word_content[-2] == data["word"][0]
+            post_word data["word"], params["room"]
+            return
+          else
+            send_message "前の言葉が「ー」で終わる場合はその前の文字からはじめてください"
+          end
+        end
         send_message "前の言葉の最後の文字ととこの言葉の最初の文字が一致していません"
       else
         post_word data["word"], params["room"]
