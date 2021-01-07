@@ -23,10 +23,8 @@ ActiveRecord::Schema.define(version: 2021_01_06_093141) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
-    t.integer "room_ownerships_id"
     t.integer "room_ownership_id"
     t.index ["room_ownership_id"], name: "index_rooms_on_room_ownership_id"
-    t.index ["room_ownerships_id"], name: "index_rooms_on_room_ownerships_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_093141) do
     t.index ["user_id"], name: "index_words_on_user_id"
   end
 
+  add_foreign_key "rooms", "room_ownerships"
   add_foreign_key "words", "rooms"
   add_foreign_key "words", "users"
 end

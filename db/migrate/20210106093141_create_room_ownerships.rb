@@ -6,8 +6,6 @@ class CreateRoomOwnerships < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    change_table :rooms do |t|
-      t.belongs_to :room_ownership
-    end
+    add_reference :rooms, :room_ownership, foreign_key: true
   end
 end
