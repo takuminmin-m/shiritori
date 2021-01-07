@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :words, dependent: :nullify
   has_many :room_ownerships, dependent: :destroy
   has_many :rooms, through: :room_ownerships
+  has_many :room_memberships, dependent: :destroy
 end

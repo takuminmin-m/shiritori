@@ -1,0 +1,18 @@
+<div>
+  <h3><%= @room.name %></h3>
+  <%= form_with url: room_room_memberships_path(@room.id) do |f| %>
+    <div class="field">
+      <%= f.label :user_name, "ユーザー名" %>
+      <%= f.text_field :user_name, autofocus: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "追加" %>
+    </div>
+  <% end %>
+  <ul>
+    <% @room.room_memberships.each do |room_membership| %>
+      <li><%= room_membership.user.name %> <%= link_to "退出", room_room_memberships_path(@room.id, id: room_membership.id), method: :delete %></li>
+    <% end %>
+  </ul>
+</div>

@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    if @room.room_ownership.user != current_user
+    unless have_ownership?(@room)
       redirect_to rooms_path, alert: "権限がないためその操作を完了できません"
       return
     end
@@ -34,6 +34,13 @@ class RoomsController < ApplicationController
       redirect_to rooms_path, notice: "削除しました"
     else
       redirect_to rooms_path, alert: "削除に失敗しました"
+    end
+  end
+
+  def edit
+    unless have_ownership?(@room)
+      redirect_to rooms_path, alert: "権限がないためその操作を完了できません"
+      return
     end
   end
 
