@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'room_memberships/create'
-  get 'room_memberships/destroy'
-  root "static_pages#index"
+  # get 'room_memberships/create'
+  # get 'room_memberships/destroy'
+  # root "static_pages#index"
+  root "rooms#index"
   get 'static_pages/about'
   get 'static_pages/help'
   devise_for :users
