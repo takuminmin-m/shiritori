@@ -2,7 +2,7 @@
   <h3>管理している部屋</h3>
   <ul>
     <% current_user.rooms.each do |room| %>
-      <li><%= link_to room.name, room_url(room), data: { turbolinks: false } %> <%= link_to "削除", room_url(room), method: :destloy %></li>
+      <li><%= link_to room.name, room_url(room), data: { turbolinks: false } %> <%= link_to "削除", room_url(room), method: :destroy %></li>
     <% end %>
   </ul>
   <h3>すべての部屋</h3>
