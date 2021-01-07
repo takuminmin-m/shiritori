@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :words
-  has_many :room_ownerships
+  has_many :words, dependent: :nullify
+  has_many :room_ownerships, dependent: :destroy
   has_many :rooms, through: :room_ownerships
 end

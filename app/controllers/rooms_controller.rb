@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_room, only: %i[show update edit delete]
+  before_action :set_room, only: %i[show update edit delete destroy]
 
   def index
     @rooms = Room.all.order(:id)
@@ -21,6 +21,19 @@ class RoomsController < ApplicationController
       redirect_to rooms_path
     else
       render "new"
+    end
+  end
+
+  def destroy
+    if @room.room_ownership.user != current_user
+      redirect_to rooms_path, alert: "権限がないためその操作を完了できません"
+      return
+    end
+
+    if @room.destroy
+      redirect_to rooms_path, notice: "削除しました"
+    else
+      redirect_to rooms_path, alert: "削除に失敗しました"
     end
   end
 
